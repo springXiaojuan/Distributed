@@ -1,0 +1,30 @@
+server:
+  port: 8689
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/mybatis?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: root1234
+  application:
+    name: dubbo-provider
+
+dubbo:
+  application:
+    name: ${spring.application.name}
+  registry:
+    address: N/A
+  scan:
+    base-packages: com.xxj.dubboprovider.service.impl
+#    protocol: zookeeper
+#    check: false
+  protocol:
+    name: dubbo
+    port: 12345
+#  monitor:
+#    protocol: register
+#  consumer:
+#    check: false
+#    timeout: 3000
+
