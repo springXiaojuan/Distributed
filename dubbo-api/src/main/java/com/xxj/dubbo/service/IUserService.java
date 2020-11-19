@@ -1,6 +1,8 @@
 package com.xxj.dubbo.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.xxj.dubbo.entity.User;
+import com.xxj.dubbo.mapper.UserMapper;
 
 /**
  * @author  xuxiaojuan
@@ -12,4 +14,6 @@ public interface IUserService {
     User getUser(Long userId);
 
     String sayHello();
+
+    void addUserBatch();
 }

@@ -1,9 +1,14 @@
 package com.xxj.dubbo.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 
 import java.io.Serializable;
+import java.time.LocalTime;
 
 /**
  * @author  xuxiaojuan
@@ -11,23 +16,39 @@ import java.io.Serializable;
  */
 @Getter
 @Setter
+@TableName(value = "users")
+@Accessors(chain = true)
 public class User implements Serializable {
 
+    @TableId(type = IdType.AUTO)
     private Long id;
 
-    private String userName;
+    private String nick;
 
-    private Integer age;
+    private String phone;
 
-    private Integer sex;
+    private String password;
+
+    private String email;
+
+    private String account;
+
+    private LocalTime createTime;
+
+    private String mark;
+
 
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("User{");
         sb.append("id=").append(id);
-        sb.append(", userName='").append(userName).append('\'');
-        sb.append(", age=").append(age);
-        sb.append(", sex=").append(sex);
+        sb.append(", nick='").append(nick).append('\'');
+        sb.append(", phone='").append(phone).append('\'');
+        sb.append(", password='").append(password).append('\'');
+        sb.append(", email='").append(email).append('\'');
+        sb.append(", account='").append(account).append('\'');
+        sb.append(", createTime=").append(createTime);
+        sb.append(", mark='").append(mark).append('\'');
         sb.append('}');
         return sb.toString();
     }

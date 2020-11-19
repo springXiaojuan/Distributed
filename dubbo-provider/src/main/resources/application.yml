@@ -10,21 +10,30 @@ spring:
   application:
     name: dubbo-provider
 
+
 dubbo:
   application:
     name: ${spring.application.name}
   registry:
-    address: N/A
+    address: 127.0.0.1:2181
+    protocol: zookeeper
+    check: false
+  monitor:
+    protocol: register
+  consumer:
+    check: false
+    timeout: 30000
   scan:
-    base-packages: com.xxj.dubboprovider.service.impl
+    base-packages: com.xxj.dubboprovider
 #    protocol: zookeeper
 #    check: false
   protocol:
     name: dubbo
     port: 12345
+#  provider:
+#    token: true
 #  monitor:
 #    protocol: register
 #  consumer:
 #    check: false
 #    timeout: 3000
-
