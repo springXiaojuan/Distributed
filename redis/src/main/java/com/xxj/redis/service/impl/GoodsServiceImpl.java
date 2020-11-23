@@ -1,5 +1,7 @@
 package com.xxj.redis.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.IService;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.xxj.redis.distributeLock.jedis.JedisLock;
 import com.xxj.redis.entity.Goods;
 import com.xxj.redis.mapper.GoodServiceMapper;
@@ -12,7 +14,7 @@ import org.springframework.stereotype.Service;
  * @date 2020/11/20 4:46 下午
  */
 @Service
-public class GoodsServiceImpl implements GoodsService {
+public class GoodsServiceImpl  extends ServiceImpl<GoodServiceMapper,Goods> implements GoodsService {
 
     @Autowired
     private GoodServiceMapper goodServiceMapper;

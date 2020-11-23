@@ -1,12 +1,9 @@
 package com.xxj.redis.spring.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.connection.RedisStringCommands;
 import org.springframework.data.redis.core.BoundValueOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
-import org.springframework.data.redis.core.types.Expiration;
-import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 
 /**

@@ -1,5 +1,6 @@
 package com.xxj.dubboprovider;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -120,5 +121,29 @@ public class LeetCodeTest {
         }
         return sum;
     }
+
+
+
+    @Test
+    public void CountPrimes()
+    {
+        int n = 10;
+        int count = 0;
+        boolean signs[] = new boolean[10];
+        for (int i = 2; i < n; i++)
+        {
+            if (!signs[i])
+            {
+                count ++;
+                for (int j = i + i; j < n; j += i)
+                {
+                    signs[j] = true;
+                }
+            }
+        }
+        System.out.println(count);
+    }
+
+
 }
 

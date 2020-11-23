@@ -1,31 +1,55 @@
-package com.xxj.redis.distributeLock.jedis;
+package com.xxj.redis;
 
 import com.xxj.redis.service.GoodsService;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-
 /**
  * @author xuxiaojuan
- * @date 2020/11/20 5:08 下午
+ * @date 2020/11/23 2:29 下午
  */
-@Component
-public class Test {
+@SpringBootTest
+public class JedisLockTest {
 
     @Autowired
     private GoodsService goodsService;
 
     private static CountDownLatch countDownLatch = new CountDownLatch(1);
 
-    public static void main(String[] args) {
-        new Test().testJedisLock();
+
+    @Test
+    public void testJedisLock2() {
+        Thread[] threads=new Thread[16];
+
+        for (int i = 0; i < 16; i++) {
+            Thread thread = new Thread("线程" + i) {
+                @Override
+                public void run() {
+                    goodsService.updateGoodStore(1L);
+                }
+            };
+            threads[i]=thread;
+            thread.start();
+        }
+
+        //等待所有数组中的线程执行结束
+        for(Thread thread:threads){
+            try {
+                thread.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
+    @Test
     public  void testJedisLock() {
         ExecutorService executorService = Executors.newFixedThreadPool(16);
 
@@ -36,16 +60,15 @@ public class Test {
                     try {
                         countDownLatch.await();
                         System.out.println(Thread.currentThread().getName() + " time : " + System.currentTimeMillis());
-                       try {
-                           goodsService.updateGoodStore(1L);
-                           System.out.println("222");
-                       }catch (Exception e) {
-                           System.out.println("thread:" + Thread.currentThread().getName() + "    " + e.getMessage());
-                       }
+                        try {
+                            goodsService.updateGoodStore(1L);
+                            System.out.println("222");
+                        }catch (Exception e) {
+                            System.out.println("thread:" + Thread.currentThread().getName() + "    " + e.getMessage());
+                        }
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-
                 }
             });
         }
@@ -62,31 +85,5 @@ public class Test {
 
 
     }
-
-
-
-//    public static void testJedisLock() {
-//        Thread[] threads=new Thread[16];
-//
-//        for (int i = 0; i < 16; i++) {
-//            Thread thread = new Thread("线程" + i) {
-//                @Override
-//                public void run() {
-//                    goodsService.updateGoodStore(1L);
-//                }
-//            };
-//            threads[i]=thread;
-//            thread.start();
-//        }
-//
-//        //等待所有数组中的线程执行结束
-//        for(Thread thread:threads){
-//            try {
-//                thread.join();
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//    }
 
 }
