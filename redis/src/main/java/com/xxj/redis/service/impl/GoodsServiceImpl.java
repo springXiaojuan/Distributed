@@ -30,7 +30,8 @@ public class GoodsServiceImpl  extends ServiceImpl<GoodServiceMapper,Goods> impl
         String uniqueId = null;
         try {
             uniqueId = jedisLock.lock(LOCK_NAME, 3000L, 3000L);
-            if(uniqueId != null) {
+            Thread.sleep(60000);
+             if(uniqueId != null) {
                 Goods goods = goodServiceMapper.selectById(id);
                 if(goods.getNum() > 0) {
                     // 可以减库存
