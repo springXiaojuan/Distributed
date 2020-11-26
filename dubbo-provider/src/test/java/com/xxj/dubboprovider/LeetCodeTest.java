@@ -143,6 +143,30 @@ public class LeetCodeTest {
         }
         System.out.println(count);
     }
+    @Test
+    public void isIsomorphic() {
+
+        String s = "add";
+        String t = "eg3";
+        HashMap<Character,Character> map = new HashMap();
+        for (int i = 0; i < s.length(); i++) {
+            char sc = s.charAt(i);
+            char tc = t.charAt(i);
+            if(map.get(sc) == null) {
+                if(map.containsValue(tc)) {
+                    System.out.println(false);
+                }
+                map.put(sc,tc);
+            } else if(map.get(sc) != tc) {
+                System.out.println(false);
+            }
+
+        }
+        System.out.println(true);
+
+
+    }
+
 
 
 }

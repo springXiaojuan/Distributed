@@ -1,7 +1,8 @@
 package com.xxj.redis.spring.service;
 
+import com.xxj.redis.config.RedisConfig;
+import io.lettuce.core.RedisFuture;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
 
@@ -14,11 +15,13 @@ import org.springframework.stereotype.Service;
 public class LettuceService {
 
     @Autowired
-    private RedisTemplate redisTemplate;
+    private RedisConfig redisConfig;
 
     public void testStr() {
-        ValueOperations valueOperations = redisTemplate.opsForValue();
-        valueOperations.set("LLK1","VV1");
+//        RedisFuture sadd = redisConfig.LettuceTemplate().sadd("ss", "sss");
+//        System.out.println(sadd.get());
+        ValueOperations<String, Object> valueOperations = redisConfig.redisTemplate().opsForValue();
+        valueOperations.set("LLK1","VV2");
         System.out.println(valueOperations.get("LLK1"));
     }
 }
