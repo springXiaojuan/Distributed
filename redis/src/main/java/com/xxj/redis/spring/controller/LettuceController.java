@@ -20,4 +20,8 @@ public class LettuceController {
         lettuceService.testStr();
     }
 
+    @PostMapping("/lettuce/test")
+    public void jedisTest() {
+        lettuceService.test();
+    }
 }

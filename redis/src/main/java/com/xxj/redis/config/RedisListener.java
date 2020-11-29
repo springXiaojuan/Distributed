@@ -13,8 +13,8 @@ public class RedisListener implements MessageListener {
 
     @Override
     public void onMessage(Message message, byte[] pattern) {
-        System.out.println(new String(message.getBody()) + ":" +
-                        new String(message.getChannel()) + ":" +
-                        new String(pattern) );
+//        System.out.println(new String(message.getBody()) + ":" +
+//                        new String(message.getChannel()) + ":" +
+//                        new String(pattern) );
     }
 }

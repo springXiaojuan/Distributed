@@ -1,6 +1,7 @@
 package com.xxj.redis;
 
 import com.xxj.redis.service.GoodsService;
+import com.xxj.redis.spring.service.LettuceService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -20,15 +21,17 @@ public class JedisLockTest {
 
     @Autowired
     private GoodsService goodsService;
+    @Autowired
+    private LettuceService lettuceService;
 
     private static CountDownLatch countDownLatch = new CountDownLatch(1);
 
 
     @Test
     public void testJedisLock2() {
-        Thread[] threads=new Thread[16];
+        Thread[] threads=new Thread[1];
 
-        for (int i = 0; i < 16; i++) {
+        for (int i = 0; i < 1; i++) {
             Thread thread = new Thread("线程" + i) {
                 @Override
                 public void run() {
@@ -53,7 +56,7 @@ public class JedisLockTest {
     public  void testJedisLock() {
         ExecutorService executorService = Executors.newFixedThreadPool(16);
 
-        for (int i = 0; i < 50; i++) {
+        for (int i = 0; i < 1500; i++) {
             executorService.submit(new Runnable() {
                 @Override
                 public void run() {
@@ -82,8 +85,23 @@ public class JedisLockTest {
             System.out.println("awaitTermination interrupted :" + e);
             executorService.shutdown();
         }
-
-
     }
+
+    @Test
+    public void test() {
+        lettuceService.test();
+    }
+
+    @Test
+    public void initData() {
+        lettuceService.testStr();
+    }
+
+    @Test
+    public void runThread() {
+        lettuceService.runThread();
+    }
+
+
 
 }

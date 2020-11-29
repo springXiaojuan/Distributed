@@ -4,10 +4,7 @@ import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.regex.Pattern;
 
 /**
@@ -167,6 +164,30 @@ public class LeetCodeTest {
 
     }
 
+
+    @Test
+    public void containsDuplicate() {
+        int[] nums = new int[]{1,2,3,1};
+        Arrays.sort(nums);
+        for (int i = 0; i < nums.length - 1 ; i++) {
+            if(nums[i] == nums[i+1]) {
+                System.out.println(true);
+            }
+        }
+        System.out.println(false);
+    }
+
+    @Test
+    public void containsNearbyDuplicate() {
+      int i = -2147483648;
+      int j = 2147483647;
+
+        System.out.println(Math.abs((long)i - (long)j));
+        System.out.println(Math.abs( (long)j - (long)i ));
+        System.out.println(i -j);
+        System.out.println(j + i);
+
+    }
 
 
 }
